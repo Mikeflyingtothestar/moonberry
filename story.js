@@ -9,7 +9,7 @@ const cap=s=>s[0].toUpperCase()+s.slice(1);
 /* ---------- KIDS ---------- */
 const LESSONS={
  kindness:{prob:'a small hedgehog sitting alone, too shy to ask for help',act:'knelt down, smiled, and offered to help',moral:'a little kindness can light up someone\'s whole night'},
- bravery:{prob:'a dark, rumbly tunnel that seemed a little bit scary',act:'took a deep breath, held {pal}\'s paw, and stepped forward one brave step at a time',moral:'being brave doesn\'t mean not feeling scared. It means trying anyway'},
+ bravery:{prob:'a dark, rumbly tunnel that seemed a little bit scary',act:'took a deep breath, rested a hand on {pal}\'s {coat}, and stepped forward one brave step at a time',moral:'being brave doesn\'t mean not feeling scared. It means trying anyway'},
  sharing:{prob:'a group of tiny mice who had no blanket for the cold night',act:'shared their own warm scarf and their snack, piece by piece',moral:'when we share, there is always enough happiness to go around'},
  sleep:{prob:'a yawning baby star who kept saying it wasn\'t tired',act:'showed the little star how to brush its rays, take three slow breaths, and snuggle down',moral:'a good bedtime routine helps us wake up strong and happy'},
  honesty:{prob:'a broken flower pot that nobody had seen fall',act:'told the truth, even though their tummy felt wobbly',moral:'telling the truth makes our hearts feel light'},
@@ -33,8 +33,9 @@ const KT={
  sports:{scene:'sports',world:'Starlight Stadium',d:['the grass glowed under friendly floodlights','a crowd of animals cheered','the scoreboard flashed silly faces'],goals:['play in the Great Moon Match','teach a nervous rabbit to kick a ball','win the relay race by helping teammates'],fin:'everyone got a medal for trying their best',friend:'a speedy cheetah coach named Zoom'},
  undersea:{scene:'undersea',world:'Coral Kingdom, deep under the sea',d:['seahorses bobbed like little dancers','coral castles glowed pink and orange','an octopus waved hello with all eight arms'],goals:['find the mermaid\'s missing song','help a turtle find its way to the sea grass','collect bubbles for the Bubble Ball'],fin:'the mermaid sang the sea to sleep',friend:'a giggly octopus named Inky'},
  jungle:{scene:'jungle',world:'the Emerald Jungle',d:['vines swung like green ribbons','parrots chattered in rainbow colours','elephants splashed in a cool river'],goals:['find the hidden waterfall','help a baby elephant find its mum','return the jungle\'s lost drum before the Moon Dance'],fin:'the whole jungle danced the Moon Dance',friend:'a cheeky monkey named Mango'},
+ unicorns:{scene:'meadow',world:'Rainbow Meadow, where the unicorns live',d:['unicorns grazed on silver clover, their manes shimmering like rainbows','a waterfall of soft colours tumbled into a sparkling pool','little winged ponies dozed on fluffy clouds'],goals:['help a baby unicorn find its missing rainbow','return a lost star to the unicorn queen\'s crown','paint the night sky with a unicorn\'s glowing horn'],fin:'the baby unicorn\'s horn glowed and a rainbow curved across the moonlit sky',friend:'a gentle baby unicorn named Sprinkle'},
  magic:{scene:'magic',world:'Moonbeam Magic School',d:['broomsticks lined up neatly by the door','spell books whispered softly on their shelves','a wise owl taught Twinkling 101'],goals:['learn the spell that makes flowers glow','find the headmistress\'s runaway wand','brew a potion of sweet dreams for the whole school'],fin:'the spell worked and the whole school glittered',friend:'a young wizard cat named Whiskers'}};
-const KID_TOPICS={dinosaurs:'Dinosaurs',space:'Space & planets',ocean:'Ocean adventure',knights:'Princesses & knights',superheroes:'Superheroes',farm:'Animals & farm',fairytales:'Fairy tales retold',dragons:'Dragons (friendly)',robots:'Robots & inventions',bible:'Bible stories for kids',holidays:'Holidays & festivals',science:'Science wonders',feelings:'Friendship & feelings',sports:'Sports',undersea:'Under the sea',jungle:'Jungle safari',magic:'Magic school'};
+const KID_TOPICS={dinosaurs:'Dinosaurs',space:'Space & planets',ocean:'Ocean adventure',knights:'Princesses & knights',superheroes:'Superheroes',farm:'Animals & farm',fairytales:'Fairy tales retold',dragons:'Dragons (friendly)',robots:'Robots & inventions',bible:'Bible stories for kids',holidays:'Holidays & festivals',science:'Science wonders',feelings:'Friendship & feelings',sports:'Sports',undersea:'Under the sea',unicorns:'Unicorns & magical creatures',jungle:'Jungle safari',magic:'Magic school'};
 const KID_BIBLE=[
  {t:'Noah and the Big Boat',p:['A long, long time ago, there was a kind man named Noah. God asked Noah to build a very big boat called an ark.','Noah worked and worked. His family helped him hammer and saw. Some people laughed, but Noah kept going, because he trusted God.','Then the animals came, two by two: lions and lambs, giraffes and geese, elephants and tiny ladybirds. Everyone found a cosy spot on the ark.','The rain fell for many days. Inside the ark it was warm and safe, and the animals snuggled together.','At last the rain stopped. A dove flew out and came back with an olive leaf. Then a beautiful rainbow stretched across the sky, a promise of care.'],m:'we can trust that we are loved and looked after, even when it rains'},
  {t:'David and the Giant',p:['Long ago lived a young shepherd boy named David. He looked after his sheep and played music on his harp.','One day a giant called Goliath frightened everyone. Even the grown-up soldiers were scared.','David was small, but his heart was brave. He said, "I will try, and God will help me."','David chose five smooth stones from the stream. With faith and courage he faced the giant, and the giant fell down.','Everyone cheered. David had shown that you don\'t have to be big to be brave.'],m:'courage and faith can be bigger than any giant'},
@@ -60,7 +61,7 @@ sense:[
 'The air smelled of warm cocoa and fresh rain, and somewhere far away a wind chime tinkled, ting, ting, ting, like it was saying hello.',
 'Under their feet the ground was soft and springy, like walking on a giant marshmallow. Every step made a tiny squish, and {name} giggled.',
 'Fireflies drifted up from the grass, blinking yellow and green, as if the stars had come down for a closer look.',
-'A gentle breeze tickled {name}\'s cheeks and ruffled {pal}\'s fur. It smelled of honeysuckle and toast and faraway places.',
+'A gentle breeze tickled {name}\'s cheeks and ruffled {pal}\'s {coat}. It smelled of honeysuckle and toast and faraway places.',
 'Everything was hushed and silvery. Even the leaves seemed to whisper, shh, shh, shh, as {name} and {pal} tiptoed by.',
 'The moon hung low and round and buttery, so close that {name} felt it might be possible to reach up and touch it.',
 'Little bells hung from the branches, and when the wind blew they rang the softest song, a song that sounded a little bit like a yawn.',
@@ -68,7 +69,7 @@ sense:[
 'Somewhere a cricket was playing a sleepy tune, chirp, chirp, chirp, slower and slower, as if it was getting ready for bed too.',
 'The clouds above were fluffy and pink at the edges, like candyfloss, and they moved so slowly that they almost stood still.'],
 dia:[
-'"Are you scared?" asked {pal}. "A tiny bit," said {name}. "But mostly excited." "Me too," said {pal}, and squeezed {name}\'s hand.',
+'"Are you scared?" asked {pal}. "A tiny bit," said {name}. "But mostly excited." "Me too," said {pal}, and nuzzled up close against {name}.',
 '"How far is it now?" asked {name}. {pal} looked at the glowing map. "Not far," said {pal}. "Just past the next three wonders."',
 '"Do you know what I love most about the night?" whispered {pal}. "What?" asked {name}. "It\'s when all the brave dreams wake up."',
 '"I\'m getting a little bit sleepy," said the new friend, rubbing its eyes. "Just a little longer," said {name} kindly. "We\'re nearly there."',
@@ -77,7 +78,7 @@ dia:[
 '"Let\'s sing to keep our feet happy," said {pal}. And they sang, "Step by step and star by star, we are braver than we think we are."'],
 enc:[
 'Next they came to a little wooden bridge over a sparkling stream. The bridge creaked, creak, creak, and a family of ducks floated underneath, quacking a polite good evening. {name} waved, and the ducks waved their wings right back.',
-'Along the path stood a tree with leaves as big as umbrellas. Hanging from every branch were glowing fruits, round and warm like little lanterns. {pal} picked one and shared it with {name}. It tasted of strawberries and sunshine.',
+'Along the path stood a tree with leaves as big as umbrellas. Hanging from every branch were glowing fruits, round and warm like little lanterns. {pal} nudged one down from a low branch for {name}. It tasted of strawberries and sunshine.',
 'They found a snail with a shell painted in swirly stripes, moving very, very slowly. "Where are you going, Mr Snail?" asked {name}. "Home," said the snail. "There is no hurry. The best things take their time." {name} decided to remember that.',
 'A family of rabbits was having a midnight picnic under a mushroom. "Would you like a carrot biscuit?" asked the littlest rabbit. {name} took one and said thank you, and it crunched in the most delightful way.',
 'Then the path split into two. One way was bright and noisy. The other way was soft and twinkly. {name} closed {p} eyes, listened carefully, and chose the twinkly path, because it felt right.',
@@ -87,16 +88,16 @@ enc:[
 'They passed a little cottage with a round blue door. A grandmother mouse was knitting on the step. She gave {name} a tiny woolly hat, the right size for a thumb, and said, "For luck, dear."',
 'A gust of wind blew {pal}\'s scarf right off and up into a tree! {name} did not panic. {name} stood on tiptoe, stretched as tall as possible, and gently unhooked it. "Thank you," said {pal}, wrapping it back on.',
 'In a clearing, {d1}, just like before, but now even more of them had gathered. {name} sat very still and watched, and it felt like the most special secret in the world.',
-'They had to cross a field of tall grass that swished and swayed. To stay together, they held hands in a line, {name} at the front, and counted their steps out loud: one, two, three, four, all the way across.',
+'They had to cross a field of tall grass that swished and swayed. To stay together, they walked in a snug little line, {pal} pressed close against {name}\'s side, and counted their steps out loud: one, two, three, four, all the way across.',
 'A little cloud floated down and hovered right beside them. It was a baby cloud, and it was lost. {name} pointed to the big clouds above. "Your family is up there," said {name}. The baby cloud puffed happily and floated home.',
-'They stopped to rest on a log that was soft with moss. {pal} took out three tiny cups and a flask of warm milk with honey. They sipped slowly and listened to the night, and nobody needed to say anything at all.',
+'They stopped to rest on a log that was soft with moss. {pal} nosed open a little basket with three tiny cups and a flask of warm milk with honey inside. They sipped slowly and listened to the night, and nobody needed to say anything at all.',
 'A stream of glowing stepping stones led across a quiet river. Each stone lit up when someone stepped on it: blue, then green, then gold. {name} hopped carefully from one to the next, and did not wobble once.',
 'Up ahead, {d2}. The new friend laughed with delight. "I always wanted to see that," it said, "and now I have, because you let me come along."'],
 wind:[
 'Now, {name}, it is time to rest. Let your toes be still. Let your knees be still. Let your tummy rise up and down, slow and soft, like a little boat on a calm sea.',
 'Far away in {world}, {pal}\'s friends are getting ready for bed too. The lights are going out one by one. Blink. Blink. Blink. Everyone is safe, and everyone is warm.',
 'Take a big breath in, like you are smelling a flower. And let it out slowly, like you are blowing a feather. One more time. Breathe in, and breathe out. Good.',
-'{pal} has curled up at the bottom of the bed, tail tucked in, eyes closing. "Thank you for the adventure," {pal} whispers. "Same time tomorrow?"',
+'{pal} has curled up at the bottom of the bed, snug and still, eyes closing. "Thank you for the adventure," {pal} whispers. "Same time tomorrow?"',
 'Your arms are heavy and cosy. Your legs are heavy and cosy. Your eyes are getting heavy too, and that is just fine. Dreams are waiting, soft and kind.',
 'Let\'s count the stars together, slowly. One star. Two stars. Three stars. Four. Five. Six stars twinkling. Seven. Eight. Nine sleepy stars. And ten.'],
 bibleReflect:[
@@ -106,16 +107,20 @@ bibleReflect:[
 'If you like, you can say a small thank-you in your heart, for the people who love you, for your cosy bed, and for today.',
 'Some people say a little prayer at bedtime. Some people just think kind thoughts. Both are lovely ways to say goodnight to the day.',
 'Let\'s think of three good things from today. Maybe a yummy lunch. Maybe a game you played. Maybe a hug. Hold them gently, like warm pebbles in your hand.']};
+const SPECIES={cat:['fur','padded'],dog:['fur','trotted'],bunny:['fur','hopped'],turtle:['shell','plodded'],bear:['fur','padded'],owl:['feathers','fluttered'],fox:['fur','trotted'],dinosaur:['scales','stomped softly'],unicorn:['mane','trotted'],dragon:['scales','padded'],elephant:['ears','plodded'],penguin:['feathers','waddled']};
+const TOPIC_KEYS=[['undersea',/mermaid|coral|octopus|fish|shark|underwater|snorkel/],['unicorns',/unicorn|pegasus|pony|ponies|horse|rainbow|fairy|fairies|magical creature/],['dinosaurs',/dino|fossil|t-?rex|prehistoric/],['space',/space|rocket|planet|star|astronaut|moon|galaxy|alien/],['ocean',/ocean|sea|beach|boat|ship|whale|dolphin|pirate|sail/],['knights',/knight|princess|prince|castle|queen|king/],['superheroes',/superhero|hero|marvel|batman|spider|cape/],['farm',/farm|cow|sheep|pig|chicken|tractor|horse/],['dragons',/dragon/],['robots',/robot|lego|build|machine|coding|computer|invent/],['science',/science|experiment|chemistry|volcano|magnet|lab/],['sports',/football|soccer|sport|ball|run|swim|badminton|basketball|cycling/],['jungle',/jungle|safari|lion|tiger|elephant|monkey|giraffe|zoo|animal/],['magic',/magic|wizard|witch|spell|potion|harry/],['fairytales',/fairy ?tale|story|book|reading|cinderella|gingerbread/],['feelings',/friend|feeling|kind|hug|art|draw|paint|music|sing|danc/]];
+function matchTopic(interests){const t=String(interests||'').toLowerCase();for(const[k,re]of TOPIC_KEYS)if(re.test(t))return k;return null}
 function genKid({child,lesson,length,topic,friend},r){
- const name=child.name,pal=child.animal||'bunny',P=[],pr=pron(child),lvl=kidLevel(child.age);
+ const name=child.name,pal=child.animal||'bunny',P=[],pr=pron(child),lvl=kidLevel(child.age);const SPa=SPECIES[pal]||['fur','padded'],SP={coat:SPa[0],move:SPa[1]};
  const palName=pick(['Pip','Juniper','Biscuit','Moss','Coco','Pebble','Luna','Toffee','Maple'],r);
  const L=LESSONS[lesson]||LESSONS.kindness;
  const mins=length==='long'||+length===15?15:length==='medium'||+length===10?10:5,target=KWORDS[mins];
  const ints=(child.interests||'').split(',').map(s=>s.trim()).filter(Boolean),interest=ints.length?pick(ints,r):'adventures';
+ if(topic==='auto'||!topic)topic=matchTopic(child.interests)||'';
  if(!KT[topic])topic=pick(Object.keys(KT).filter(k=>!KT[k].bible&&!KT[k].holiday),r);
  const T=KT[topic];
  const wc=()=>P.join(' ').split(/\s+/).length;
- const v={name,pal:palName,animal:pal};
+ const v={name,pal:palName,animal:pal,coat:SP.coat,move:SP.move};
  const pool=k=>shuffle(KPOOL[k],r);
  if(T.bible){const B=pick(KID_BIBLE,r);v.t=B.t;v.m=B.m;
   P.push(`Snuggle in, ${name}. ${palName} the ${pal} has curled up at the end of your bed, ready to hear a very old and very special story. "Is it a long one?" ${palName} asks. "Long enough for a cosy night," you say, and the lamp glows soft and gold.`);
@@ -135,10 +140,11 @@ function genKid({child,lesson,length,topic,friend},r){
  // 1 opening
  P.push(pick([`Once upon a time, when the sky turned the colour of blueberries, ${name} lay in bed thinking about ${interest}. The blanket was warm, the pillow was soft, and the night-light made a little round moon on the ceiling. Suddenly, a soft tap-tap came at the window. It was ${palName} the ${pal}, wearing a tiny scarf that glowed like moonlight.`,
   `${name} was just about to fall asleep when the moonbeam on the wall began to wiggle. It wiggled to the left, and it wiggled to the right, and then, with a tiny pop, out hopped ${palName} the ${pal}, with a twinkle in its eye and a little bag over one shoulder.`,
-  `On a quiet, starry night, ${name}'s pillow gave a gentle giggle. ${name} lifted one corner, very slowly, and peeked underneath. There sat ${palName} the ${pal}, holding a map that glowed silver, with paths drawn in sparkly ink.`],r));
- P.push(`"${name}! We need your help," whispered ${palName}. "Tonight we must ${goal}. And everyone says you know all about ${interest}." ${name} sat up and rubbed ${pr.p} eyes. "Me?" ${palName} nodded. "You." So ${name} slipped on slippers, held ${palName}'s soft paw, and together they floated out of the window, over the garden and the rooftops, all the way to ${world}.`);
+  `On a quiet, starry night, ${name}'s pillow gave a gentle giggle. ${name} lifted one corner, very slowly, and peeked underneath. There sat ${palName} the ${pal}, sitting beside a map that glowed silver, with paths drawn in sparkly ink.`],r));
+ P.push(`"${name}! We need your help," whispered ${palName}. "Tonight we must ${goal}. And everyone says you know all about ${interest}." ${name} sat up and rubbed ${pr.p} eyes. "Me?" ${palName} nodded. "You." So ${name} slipped on slippers, rested a hand on ${palName}'s soft ${SP.coat}, and together they floated out of the window, over the garden and the rooftops, all the way to ${world}.`);
  // 2 arrival
- P.push(`There, ${d[0]}, and ${d[1]}. ${name} gasped with wonder.${friend?` ${cap(friend)} came too, holding ${name}'s hand.`:''} ${fill(pick(KPOOL.sense,r),v)}`);
+ P.push(`There, ${d[0]}, and ${d[1]}. ${name} gasped with wonder.${friend?` ${cap(friend)} came along too, staying close beside ${name}.`:''} ${fill(pick(KPOOL.sense,r),v)}`);
+ if(ints.length){const more=ints.filter(x=>x!==interest);P.push(`${name} grinned from ear to ear. Nothing in the world made ${name} happier than ${interest}${more.length?`, except maybe ${more.slice(0,2).join(' and ')}`:''}, and tonight already felt full of it. "I knew you'd like it here," said ${palName}, ${SP.move==='fluttered'?'fluttering':SP.move==='hopped'?'hopping':'bouncing'} happily.`)}
  // 3 friend + journey
  P.push(`Soon they met ${fr}. "Where are you going?" it asked. "We are going to ${goal}," said ${name}. "Can I come?" "Of course!" said ${name}. "Adventures are better with friends." So now there were three of them, and they followed the path, where ${d[2]}.`);
  const enc=pool('enc'),sen=pool('sense').filter(s=>!P.join(' ').includes(fill(s,v))),dia=pool('dia'),wd=pool('wind');
@@ -150,7 +156,7 @@ function genKid({child,lesson,length,topic,friend},r){
   `${name} thought for a moment. ${name} thought about how ${pr.s==='they'?'they':pr.s} would feel, if it were ${pr.o}. Then ${name} ${fill(L.act,v)}. At first nothing happened. Then, slowly, little by little, everything began to feel warmer and brighter, as if someone had turned up the stars.`,
   `"You did it," whispered ${palName}. ${name} smiled a small, proud smile, the kind of smile that you feel in your tummy. "We did it," said ${name}. "Together."`];
  const ending=[`At last, ${fin}. Everyone cheered softly, so as not to wake the babies, and then they all sat down together on the soft grass to watch the stars.`,
-  `"Thank you, ${name}," said ${fr.replace(/^an? /,'the ')}. "We could never have done it without you." And ${palName} gave ${name} the biggest, softest cuddle in the whole wide world.`];
+  `"Thank you, ${name}," said ${fr.replace(/^an? /,'the ')}. "We could never have done it without you." And ${palName} snuggled up against ${name}, the softest, warmest snuggle in the whole wide world.`];
  const home=`Then ${palName} carried ${name} home on a ribbon of moonlight, past the sleepy clouds, over the quiet rooftops, and back in through the window. ${name}'s bed was still warm. The blanket was still soft. Tucked in tight, ${name} remembered that ${L.moral}.`;
  const close=`${pick(['The stars twinkled goodnight.','The Moon pulled up a blanket of clouds.','Far away, a little owl hooted "sweet dreams."'],r)} Goodnight, ${name}. Sleep tight. 🌙`;
  const fixedWords=[...chal,...ending,home,close].join(' ').split(/\s+/).length;
@@ -161,7 +167,7 @@ function genKid({child,lesson,length,topic,friend},r){
  P.push(...mid.slice(0,cut),...chal,...mid.slice(cut),...ending);
  const others=shuffle(Object.keys(KT).filter(k=>k!==topic&&!KT[k].bible&&!KT[k].holiday),r);
  while(wc()+home.split(/\s+/).length+200<target&&others.length){const T2=KT[others.pop()],d2=shuffle(T2.d,r);
-  P.push(`But the night was not over yet. "One more stop on the way home," said ${palName}, unfolding the glowing map again. "There's somewhere I've always wanted to show you." And off they floated, over the hills, to ${T2.world}.`);
+  P.push(`But the night was not over yet. "One more stop on the way home," said ${palName}, nudging the glowing map open again. "There's somewhere I've always wanted to show you." And off they floated, over the hills, to ${T2.world}.`);
   P.push(`There, ${d2[0]}, and ${d2[1]}. ${name} and ${palName} sat on a soft little hill and watched quietly. "It's beautiful," whispered ${name}. Then they saw that ${d2[2]}, and they both smiled.`);
   P.push(`They met ${T2.friend}, who was busy trying to ${pick(T2.goals,r)}. "Can we help?" asked ${name}. So they helped, kindly and patiently, until at last ${T2.fin}. "Thank you," it said, waving goodbye as they floated on.`)}
  P.push(home);
@@ -170,7 +176,7 @@ function genKid({child,lesson,length,topic,friend},r){
  if(wc()<target){P.push(`Let's count the sleepy sheep, ${name}, one by one, as they jump over the moon fence.`);for(let i=0;wc()<target;i++){const s=sheep(i);if(!s)break;P.push(s)}}
  P.push(close);
  let pages=P;if(lvl==='little')pages=P.map(t=>t.replace(/, and (?=[a-z])/g,'. And '));
- const TN={dinosaurs:'Moon Pond Dinosaurs',space:'Twinkling Galaxy',ocean:'Silver Tide',knights:'Kingdom of Cloudtop',superheroes:'Brightest City',farm:'Sleepy Barn',fairytales:'Storybook Woods',dragons:'Little Dragon',robots:'Dream Machine',science:'Wonder Lab',feelings:'Feelings Garden',sports:'Moon Match',undersea:'Mermaid\'s Song',jungle:'Hidden Waterfall',magic:'Glowing Spell'};
+ const TN={dinosaurs:'Moon Pond Dinosaurs',space:'Twinkling Galaxy',ocean:'Silver Tide',knights:'Kingdom of Cloudtop',superheroes:'Brightest City',farm:'Sleepy Barn',fairytales:'Storybook Woods',dragons:'Little Dragon',robots:'Dream Machine',science:'Wonder Lab',feelings:'Feelings Garden',sports:'Moon Match',undersea:'Mermaid\'s Song',jungle:'Hidden Waterfall',magic:'Glowing Spell',unicorns:'Rainbow Unicorn'};
  const tn=T.holiday?world.replace('a house full of ','').replace(' cheer',' Night'):TN[topic];
  const title=pick([`${name} and the ${tn}`,`${name}, ${palName} and the ${tn}`,`${name}'s ${tn} Adventure`],r);
  return {title,scene,pages:pages.map((t,i)=>({text:t,scene:i===0||i>=P.length-2?'bedroom':scene})),animal:pal,topic,lesson,mode:'kids',minutes:mins};
@@ -311,5 +317,5 @@ function generate(o){const r=rng(o.seed||Date.now()+Math.random()+(o.child&&o.ch
  if(o.mode==='adult')return genAdult(o,r);
  if(BANNED_FOR_KIDS.includes(o.topic))o.topic='space';
  return genKid(o,r)}
-window.Story={generate,LESSONS:Object.keys(LESSONS),KID_TOPICS,ADULT_GENRES};
+window.Story={generate,matchTopic,LESSONS:Object.keys(LESSONS),KID_TOPICS,ADULT_GENRES};
 })();
