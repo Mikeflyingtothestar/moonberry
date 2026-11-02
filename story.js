@@ -49,37 +49,133 @@ const HOLIDAYS=[
 const LEN={short:1,medium:2,long:3};
 function pron(c){const p=c.pronoun||'they';return p==='he'?{s:'he',o:'him',p:'his'}:p==='she'?{s:'she',o:'her',p:'her'}:{s:'they',o:'them',p:'their'}}
 function kidLevel(age){age=+age||5;return age<=5?'little':age<=8?'middle':'big'}
+const SHEEPC=['fluffy white','sleepy grey','tiny cream','curly brown','spotty','very round','giggly','yawning','pyjama-wearing','slow and careful'];
+const SHEEPD=['hops over the moon fence','tiptoes over the fence','floats over the fence like a cloud','does a little twirl over the fence','jumps over the fence and says "baa, goodnight"','climbs over the fence very slowly','bounces over the fence on a pillow','yawns, then hops over the fence'];
+const NUMK=['One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty'];
+function sheep(i){const a=[0,1,2,3].map(k=>i*4+k).filter(n=>n<NUMK.length);if(!a.length)return null;return a.map(n=>`${NUMK[n]}: a ${SHEEPC[n%SHEEPC.length]} sheep ${SHEEPD[(n*3)%SHEEPD.length]}.`).join(' ')+' Slower now, and softer.'}
+const KWORDS={5:720,10:1350,15:2000};
+const BIBLE_EXT={};
+const KPOOL={
+sense:[
+'The air smelled of warm cocoa and fresh rain, and somewhere far away a wind chime tinkled, ting, ting, ting, like it was saying hello.',
+'Under their feet the ground was soft and springy, like walking on a giant marshmallow. Every step made a tiny squish, and {name} giggled.',
+'Fireflies drifted up from the grass, blinking yellow and green, as if the stars had come down for a closer look.',
+'A gentle breeze tickled {name}\'s cheeks and ruffled {pal}\'s fur. It smelled of honeysuckle and toast and faraway places.',
+'Everything was hushed and silvery. Even the leaves seemed to whisper, shh, shh, shh, as {name} and {pal} tiptoed by.',
+'The moon hung low and round and buttery, so close that {name} felt it might be possible to reach up and touch it.',
+'Little bells hung from the branches, and when the wind blew they rang the softest song, a song that sounded a little bit like a yawn.',
+'Puddles shone like mirrors, and in each one {name} could see a tiny moon and a tiny {name} waving back.',
+'Somewhere a cricket was playing a sleepy tune, chirp, chirp, chirp, slower and slower, as if it was getting ready for bed too.',
+'The clouds above were fluffy and pink at the edges, like candyfloss, and they moved so slowly that they almost stood still.'],
+dia:[
+'"Are you scared?" asked {pal}. "A tiny bit," said {name}. "But mostly excited." "Me too," said {pal}, and squeezed {name}\'s hand.',
+'"How far is it now?" asked {name}. {pal} looked at the glowing map. "Not far," said {pal}. "Just past the next three wonders."',
+'"Do you know what I love most about the night?" whispered {pal}. "What?" asked {name}. "It\'s when all the brave dreams wake up."',
+'"I\'m getting a little bit sleepy," said the new friend, rubbing its eyes. "Just a little longer," said {name} kindly. "We\'re nearly there."',
+'"Look!" cried {name}, pointing up. "A shooting star! Quick, make a wish!" Everyone closed their eyes and wished, very quietly, inside their hearts.',
+'"What do you think is waiting for us?" asked {pal}. {name} thought about {interest}. "Something wonderful," said {name}. "I can feel it."',
+'"Let\'s sing to keep our feet happy," said {pal}. And they sang, "Step by step and star by star, we are braver than we think we are."'],
+enc:[
+'Next they came to a little wooden bridge over a sparkling stream. The bridge creaked, creak, creak, and a family of ducks floated underneath, quacking a polite good evening. {name} waved, and the ducks waved their wings right back.',
+'Along the path stood a tree with leaves as big as umbrellas. Hanging from every branch were glowing fruits, round and warm like little lanterns. {pal} picked one and shared it with {name}. It tasted of strawberries and sunshine.',
+'They found a snail with a shell painted in swirly stripes, moving very, very slowly. "Where are you going, Mr Snail?" asked {name}. "Home," said the snail. "There is no hurry. The best things take their time." {name} decided to remember that.',
+'A family of rabbits was having a midnight picnic under a mushroom. "Would you like a carrot biscuit?" asked the littlest rabbit. {name} took one and said thank you, and it crunched in the most delightful way.',
+'Then the path split into two. One way was bright and noisy. The other way was soft and twinkly. {name} closed {p} eyes, listened carefully, and chose the twinkly path, because it felt right.',
+'They reached a hill covered in flowers that hummed. Each flower hummed a different note, and when {name} walked between them, they made a song together, like a tiny orchestra playing just for {name}.',
+'A big, kind owl sat on a fence post. "Who, who goes there?" asked the owl. "It\'s {name}, and {pal}, and our new friend," said {name}. "Ah," said the owl, nodding wisely. "I have heard you are very helpful. Go on, the way is safe."',
+'At the edge of a pond, the frogs were having a jumping contest. Splash! Splash! Splosh! {name} cheered for every frog, even the one who fell over, because trying is the bravest part.',
+'They passed a little cottage with a round blue door. A grandmother mouse was knitting on the step. She gave {name} a tiny woolly hat, the right size for a thumb, and said, "For luck, dear."',
+'A gust of wind blew {pal}\'s scarf right off and up into a tree! {name} did not panic. {name} stood on tiptoe, stretched as tall as possible, and gently unhooked it. "Thank you," said {pal}, wrapping it back on.',
+'In a clearing, {d1}, just like before, but now even more of them had gathered. {name} sat very still and watched, and it felt like the most special secret in the world.',
+'They had to cross a field of tall grass that swished and swayed. To stay together, they held hands in a line, {name} at the front, and counted their steps out loud: one, two, three, four, all the way across.',
+'A little cloud floated down and hovered right beside them. It was a baby cloud, and it was lost. {name} pointed to the big clouds above. "Your family is up there," said {name}. The baby cloud puffed happily and floated home.',
+'They stopped to rest on a log that was soft with moss. {pal} took out three tiny cups and a flask of warm milk with honey. They sipped slowly and listened to the night, and nobody needed to say anything at all.',
+'A stream of glowing stepping stones led across a quiet river. Each stone lit up when someone stepped on it: blue, then green, then gold. {name} hopped carefully from one to the next, and did not wobble once.',
+'Up ahead, {d2}. The new friend laughed with delight. "I always wanted to see that," it said, "and now I have, because you let me come along."'],
+wind:[
+'Now, {name}, it is time to rest. Let your toes be still. Let your knees be still. Let your tummy rise up and down, slow and soft, like a little boat on a calm sea.',
+'Far away in {world}, {pal}\'s friends are getting ready for bed too. The lights are going out one by one. Blink. Blink. Blink. Everyone is safe, and everyone is warm.',
+'Take a big breath in, like you are smelling a flower. And let it out slowly, like you are blowing a feather. One more time. Breathe in, and breathe out. Good.',
+'{pal} has curled up at the bottom of the bed, tail tucked in, eyes closing. "Thank you for the adventure," {pal} whispers. "Same time tomorrow?"',
+'Your arms are heavy and cosy. Your legs are heavy and cosy. Your eyes are getting heavy too, and that is just fine. Dreams are waiting, soft and kind.',
+'Let\'s count the stars together, slowly. One star. Two stars. Three stars. Four. Five. Six stars twinkling. Seven. Eight. Nine sleepy stars. And ten.'],
+bibleReflect:[
+'Can you imagine being there, {name}? Imagine the sounds, the smells, the warm wind. People long ago listened to this story just like you, wrapped up warm at night.',
+'{pal} wiggled closer. "Do you think they were scared?" {pal} asked. "Maybe a little," you say. "But they were not alone. And neither are we."',
+'This story reminds us that {m}. That is a very good thing to remember when the night is dark and quiet.',
+'If you like, you can say a small thank-you in your heart, for the people who love you, for your cosy bed, and for today.',
+'Some people say a little prayer at bedtime. Some people just think kind thoughts. Both are lovely ways to say goodnight to the day.',
+'Let\'s think of three good things from today. Maybe a yummy lunch. Maybe a game you played. Maybe a hug. Hold them gently, like warm pebbles in your hand.']};
 function genKid({child,lesson,length,topic,friend},r){
  const name=child.name,pal=child.animal||'bunny',P=[],pr=pron(child),lvl=kidLevel(child.age);
  const palName=pick(['Pip','Juniper','Biscuit','Moss','Coco','Pebble','Luna','Toffee','Maple'],r);
- const L=LESSONS[lesson]||LESSONS.kindness,ln=LEN[length]||2;
+ const L=LESSONS[lesson]||LESSONS.kindness;
+ const mins=length==='long'||+length===15?15:length==='medium'||+length===10?10:5,target=KWORDS[mins];
  const ints=(child.interests||'').split(',').map(s=>s.trim()).filter(Boolean),interest=ints.length?pick(ints,r):'adventures';
  if(!KT[topic])topic=pick(Object.keys(KT).filter(k=>!KT[k].bible&&!KT[k].holiday),r);
  const T=KT[topic];
- if(T.bible){const B=pick(KID_BIBLE,r);P.push(`Snuggle in, ${name}. ${palName} the ${pal} has curled up at the end of your bed, ready to hear a very old and very special story.`);B.p.forEach(x=>P.push(x));if(ln>1)P.push(`${palName} yawned. "I like that story," ${palName} whispered. "${cap(B.m)}."`);P.push(`And so, ${name}, as you close your eyes, remember that ${B.m}. Goodnight, sleep tight. 🌙`);
-  return {title:B.t,scene:'bible',pages:P.map((t,i)=>({text:t,scene:i===0||i===P.length-1?'bedroom':'bible'})),animal:pal,topic,lesson,mode:'kids'}}
+ const wc=()=>P.join(' ').split(/\s+/).length;
+ const v={name,pal:palName,animal:pal};
+ const pool=k=>shuffle(KPOOL[k],r);
+ if(T.bible){const B=pick(KID_BIBLE,r);v.t=B.t;v.m=B.m;
+  P.push(`Snuggle in, ${name}. ${palName} the ${pal} has curled up at the end of your bed, ready to hear a very old and very special story. "Is it a long one?" ${palName} asks. "Long enough for a cosy night," you say, and the lamp glows soft and gold.`);
+  P.push(`"This story was told by mums and dads and grandmas and grandpas for thousands of years," ${palName} whispers, "around fires and in little houses, just like we are telling it now." The story is called ${B.t}.`);
+  B.p.forEach((x,i)=>{P.push(x);const e=BIBLE_EXT[B.t];if(e&&e[i])P.push(e[i])});
+  const more=shuffle(KID_BIBLE.filter(x=>x!==B),r);while(wc()<target-260&&more.length){const N=more.pop();P.push(`"Can we have another one?" asks ${palName}. "Just one more," you say. This one is called ${N.t}.`);N.p.forEach(x=>P.push(x));P.push(`And that story reminds us that ${N.m}.`)}
+  const ref=pool('bibleReflect');while(wc()<target-90&&ref.length)P.push(fill(ref.pop(),v));
+  if(wc()<target-60){P.push(`Let's count the sleepy sheep together, ${name}, as they jump over the moon fence.`);for(let i=0;wc()<target-60;i++){const s=sheep(i);if(!s)break;P.push(s)}}
+  if(wc()<target-60){P.push(`Now let's count the stars in the window, ${name}.`);for(let i=0;wc()<target-60;i++){const s=starCount(i);if(!s)break;P.push(s)}}
+  P.push(`${palName} yawned a big, slow yawn. "I like that story," ${palName} whispered. "${cap(B.m)}."`);
+  P.push(`And so, ${name}, as you close your eyes, remember that ${B.m}. Breathe in slowly, and breathe out slowly. Goodnight, sleep tight. 🌙`);
+  return {title:B.t,scene:'bible',pages:P.map((t,i)=>({text:t,scene:i===0||i===P.length-1?'bedroom':'bible'})),animal:pal,topic,lesson,mode:'kids',minutes:mins}}
  let world,d,goal,fin,scene,fr;
  if(T.holiday){const H=pick(HOLIDAYS,r);world=`a house full of ${H.n} cheer`;d=H.d;goal=H.g;fin=H.fin;scene=H.scene;fr='a little cousin who was visiting'}
  else{world=T.world;d=shuffle(T.d,r);goal=pick(T.goals,r);fin=T.fin;scene=T.scene;fr=T.friend}
- const v={name,pal:palName};
- const open=pick([`Once upon a time, when the sky turned the colour of blueberries, ${name} lay in bed thinking about ${interest}. Suddenly, a soft tap-tap came at the window. It was ${palName} the ${pal}, wearing a tiny scarf that glowed like moonlight.`,
-  `${name} was just about to fall asleep when the moonbeam on the wall began to wiggle. Out hopped ${palName} the ${pal}, with a twinkle in ${pr.p==='their'?'its':'its'} eye.`,
-  `On a quiet, starry night, ${name}'s pillow gave a gentle giggle. Underneath it, ${palName} the ${pal} was holding a map that glowed silver.`],r);
- P.push(open);
- P.push(`"${name}! We need your help," whispered ${palName}. "Tonight we must ${goal}. And everyone says you know all about ${interest}." ${name} slipped on slippers, and together they floated out to ${world}.`);
- P.push(`There, ${d[0]}, and ${d[1]}. ${name} gasped with wonder.${friend?` ${cap(friend)} came too, holding ${name}'s hand.`:''}`);
- if(ln>=2)P.push(`Soon they met ${fr}. "Can I come?" it asked. "Of course!" said ${name}. Together they followed the path, where ${d[2]}.`);
- P.push(`But on the way, they found ${L.prob}. ${palName} looked at ${name}. "What should we do?"`);
- P.push(`${name} thought for a moment. Then ${pr.s} ${fill(L.act,v)}. Slowly, everything began to feel warmer and brighter.`);
- if(ln>=3){P.push(`To say thank you, their new friend joined them, and they sang a little travelling song: "Step by step and star by star, we are braver than we think we are."`);P.push(`The path wound up and down, past sleepy hills and humming flowers. ${name} counted the stars: one, two, three… all the way to ten, feeling calm and happy.`)}
- P.push(`At last, ${fin}. Everyone cheered softly so as not to wake the babies.`);
- P.push(`${palName} gave ${name} a cuddle and carried ${pr.o} home on a ribbon of moonlight. Tucked in bed, ${name} remembered that ${L.moral}. ${pick(['The stars twinkled goodnight.','The Moon pulled up a blanket of clouds.','Far away, a little owl hooted "sweet dreams."'],r)} Goodnight, ${name}. 🌙`);
+ Object.assign(v,{world,fr,goal,d0:d[0],d1:d[1],d2:d[2],fin,interest});
+ // 1 opening
+ P.push(pick([`Once upon a time, when the sky turned the colour of blueberries, ${name} lay in bed thinking about ${interest}. The blanket was warm, the pillow was soft, and the night-light made a little round moon on the ceiling. Suddenly, a soft tap-tap came at the window. It was ${palName} the ${pal}, wearing a tiny scarf that glowed like moonlight.`,
+  `${name} was just about to fall asleep when the moonbeam on the wall began to wiggle. It wiggled to the left, and it wiggled to the right, and then, with a tiny pop, out hopped ${palName} the ${pal}, with a twinkle in its eye and a little bag over one shoulder.`,
+  `On a quiet, starry night, ${name}'s pillow gave a gentle giggle. ${name} lifted one corner, very slowly, and peeked underneath. There sat ${palName} the ${pal}, holding a map that glowed silver, with paths drawn in sparkly ink.`],r));
+ P.push(`"${name}! We need your help," whispered ${palName}. "Tonight we must ${goal}. And everyone says you know all about ${interest}." ${name} sat up and rubbed ${pr.p} eyes. "Me?" ${palName} nodded. "You." So ${name} slipped on slippers, held ${palName}'s soft paw, and together they floated out of the window, over the garden and the rooftops, all the way to ${world}.`);
+ // 2 arrival
+ P.push(`There, ${d[0]}, and ${d[1]}. ${name} gasped with wonder.${friend?` ${cap(friend)} came too, holding ${name}'s hand.`:''} ${fill(pick(KPOOL.sense,r),v)}`);
+ // 3 friend + journey
+ P.push(`Soon they met ${fr}. "Where are you going?" it asked. "We are going to ${goal}," said ${name}. "Can I come?" "Of course!" said ${name}. "Adventures are better with friends." So now there were three of them, and they followed the path, where ${d[2]}.`);
+ const enc=pool('enc'),sen=pool('sense').filter(s=>!P.join(' ').includes(fill(s,v))),dia=pool('dia'),wd=pool('wind');
+ const mid=[];const addEnc=()=>{if(enc.length)mid.push(fill(enc.pop(),v));if(sen.length&&r()<.5)mid.push(fill(sen.pop(),v));if(dia.length&&r()<.6)mid.push(fill(dia.pop(),v))};
+ // encounters 2-3 minimum
+ addEnc();addEnc();
+ // challenge + turning point
+ const chal=[`But just around the bend, they found ${L.prob}. Everyone stopped. The path went quiet. ${palName} looked at ${name}, and the new friend looked at ${name} too. "What should we do?" they whispered.`,
+  `${name} thought for a moment. ${name} thought about how ${pr.s==='they'?'they':pr.s} would feel, if it were ${pr.o}. Then ${name} ${fill(L.act,v)}. At first nothing happened. Then, slowly, little by little, everything began to feel warmer and brighter, as if someone had turned up the stars.`,
+  `"You did it," whispered ${palName}. ${name} smiled a small, proud smile, the kind of smile that you feel in your tummy. "We did it," said ${name}. "Together."`];
+ const ending=[`At last, ${fin}. Everyone cheered softly, so as not to wake the babies, and then they all sat down together on the soft grass to watch the stars.`,
+  `"Thank you, ${name}," said ${fr.replace(/^an? /,'the ')}. "We could never have done it without you." And ${palName} gave ${name} the biggest, softest cuddle in the whole wide world.`];
+ const home=`Then ${palName} carried ${name} home on a ribbon of moonlight, past the sleepy clouds, over the quiet rooftops, and back in through the window. ${name}'s bed was still warm. The blanket was still soft. Tucked in tight, ${name} remembered that ${L.moral}.`;
+ const close=`${pick(['The stars twinkled goodnight.','The Moon pulled up a blanket of clouds.','Far away, a little owl hooted "sweet dreams."'],r)} Goodnight, ${name}. Sleep tight. 🌙`;
+ const fixedWords=[...chal,...ending,home,close].join(' ').split(/\s+/).length;
+ const windWords=2*60;
+ while(wc()+mid.join(' ').split(/\s+/).length+fixedWords+windWords<target&&(enc.length||sen.length||dia.length)){if(enc.length)addEnc();else if(sen.length)mid.push(fill(sen.pop(),v));else mid.push(fill(dia.pop(),v))}
+ // place challenge after ~2/3 of middle
+ const cut=Math.max(2,Math.floor(mid.length*0.7));
+ P.push(...mid.slice(0,cut),...chal,...mid.slice(cut),...ending);
+ const others=shuffle(Object.keys(KT).filter(k=>k!==topic&&!KT[k].bible&&!KT[k].holiday),r);
+ while(wc()+home.split(/\s+/).length+200<target&&others.length){const T2=KT[others.pop()],d2=shuffle(T2.d,r);
+  P.push(`But the night was not over yet. "One more stop on the way home," said ${palName}, unfolding the glowing map again. "There's somewhere I've always wanted to show you." And off they floated, over the hills, to ${T2.world}.`);
+  P.push(`There, ${d2[0]}, and ${d2[1]}. ${name} and ${palName} sat on a soft little hill and watched quietly. "It's beautiful," whispered ${name}. Then they saw that ${d2[2]}, and they both smiled.`);
+  P.push(`They met ${T2.friend}, who was busy trying to ${pick(T2.goals,r)}. "Can we help?" asked ${name}. So they helped, kindly and patiently, until at last ${T2.fin}. "Thank you," it said, waving goodbye as they floated on.`)}
+ P.push(home);
+ while(wc()<target-25&&wd.length)P.push(fill(wd.pop(),v));
+ if(wd.length)P.push(fill(wd.pop(),v));
+ if(wc()<target){P.push(`Let's count the sleepy sheep, ${name}, one by one, as they jump over the moon fence.`);for(let i=0;wc()<target;i++){const s=sheep(i);if(!s)break;P.push(s)}}
+ P.push(close);
  let pages=P;if(lvl==='little')pages=P.map(t=>t.replace(/, and (?=[a-z])/g,'. And '));
  const TN={dinosaurs:'Moon Pond Dinosaurs',space:'Twinkling Galaxy',ocean:'Silver Tide',knights:'Kingdom of Cloudtop',superheroes:'Brightest City',farm:'Sleepy Barn',fairytales:'Storybook Woods',dragons:'Little Dragon',robots:'Dream Machine',science:'Wonder Lab',feelings:'Feelings Garden',sports:'Moon Match',undersea:'Mermaid\'s Song',jungle:'Hidden Waterfall',magic:'Glowing Spell'};
  const tn=T.holiday?world.replace('a house full of ','').replace(' cheer',' Night'):TN[topic];
  const title=pick([`${name} and the ${tn}`,`${name}, ${palName} and the ${tn}`,`${name}'s ${tn} Adventure`],r);
- return {title,scene,pages:pages.map((t,i)=>({text:t,scene:i===0||i===P.length-1?'bedroom':scene})),animal:pal,topic,lesson,mode:'kids'};
+ return {title,scene,pages:pages.map((t,i)=>({text:t,scene:i===0||i>=P.length-2?'bedroom':scene})),animal:pal,topic,lesson,mode:'kids',minutes:mins};
 }
+
 
 /* ---------- ADULTS ---------- */
 const BREATH=['Let your breath slow. In through the nose, a little longer out. There is nowhere you need to be.','Notice the weight of your body sinking a little deeper into the bed. Let your shoulders soften.','Take one slow breath, and as you let it go, let the day go with it.','Your eyes may grow heavy. That is fine. The story will carry on, quietly, whether you follow it or drift.'];
@@ -140,25 +236,76 @@ const AG={
   {t:'Marcus Aurelius at Night',p:['The Roman emperor Marcus Aurelius kept a private notebook, which we now call the Meditations. He wrote it for himself, often on military campaigns, far from home.','He reminded himself that we are disturbed not by things themselves, but by our judgements about them; and that the present moment is all anyone truly has.','At the end of a long day, he would examine his conduct calmly, without harshness, and resolve simply to do a little better tomorrow.'],r:'Look back on today the way he did: honestly, kindly, and briefly. Then let it go. Tomorrow is another chance.'},
   {t:'The Farmer\'s Horse',p:['An old Taoist story tells of a farmer whose horse ran away. "Such bad luck," said the neighbours. "Maybe," said the farmer.','The next day the horse returned, bringing wild horses with it. "Such good luck!" said the neighbours. "Maybe," said the farmer.','His son broke his leg taming one of the horses, and then soldiers came to take young men for war, but passed over the injured son. Each time the neighbours judged, the farmer only said, "Maybe."'],r:'We rarely know what any day truly means. Let tonight\'s worries rest in that gentle "maybe", and sleep.'}]}};
 const ADULT_GENRES=Object.fromEntries(Object.entries(AG).map(([k,v])=>[k,v.label]));
-const ALEN={5:6,10:10,20:16};
+const AWORDS={5:680,10:1250,20:2350,30:3450};// adult narration is slower (~0.85 rate + pauses, ~110-115 wpm)
+const AEXTRA={
+ghost:['Upstairs, a long corridor stretches ahead, lit by moonlight through tall windows. Each door is slightly open, and behind each one is a room left exactly as it was: a hairbrush on a dresser, a book face-down on a quilt, a vase of dried roses. Nothing here wishes you harm. The house simply remembers.','You find a music box on a windowsill and lift its lid. A thin, sweet tune spills out, and the air in the room grows warmer, as though someone has drawn closer to listen with you. When the tune winds down, you close the lid gently, the way you might tuck in a child.','Outside, the wind moves through the yew trees in the garden, and an old weathervane turns slowly on the roof, creaking. You sit on the stairs for a while and listen to the house breathe around you: the tick of a clock, the settling of beams, the patient rain.','In the kitchen, a kettle that has not been used for years is sitting warm on the range. Beside it is a note in careful handwriting: "For the traveller. Rest as long as you need." You pour yourself a cup and wrap your hands around it.'],
+heaven:['Further along, the path opens into an orchard where the trees bear fruit that glows softly, like lamps behind paper. The grass is cool beneath your feet. Birds you have never heard before sing slow, unhurried songs, and you find that you can understand the feeling in them perfectly.','There is a little house here with its door open. Inside, everything is exactly as you would have wanted a home to be: a deep armchair, a blanket, a window full of evening light. You sit down, and the chair seems to know your shape.','You notice that you are not tired here, and yet you are completely at rest. Every ache you have carried has simply been set down somewhere behind you, and you do not need to go back for it.','Someone walks beside you for a while without speaking, and you do not need to see their face to know that you are loved. The silence between you is comfortable, the way it is between very old friends.'],
+mystery:['The next morning, though really it is still the same evening in the way of stories, you visit the post office, where Mr. Hobbs is sorting letters by lamplight. He remembers seeing the baker\'s cat trotting past the hall with something orange and sticky on its whiskers. You thank him and make a small note in your notebook.','You stop at the library, where the librarian is shelving books by candlelight because the lamps are being mended. She shows you an old map of the village hall, with a little trapdoor beneath the stage marked in faded ink. You tap the map thoughtfully.','A light drizzle begins as you walk back along the green. The church clock chimes nine. The pub windows glow amber, and someone inside is laughing at a joke you cannot hear. Everything about the village feels safe and familiar, even with a small mystery afoot.','You let yourself into the hall with the vicar\'s spare key. It is cool and quiet inside, smelling of floor polish and old hymn books. Your torch picks out a line of tiny paw prints leading, very clearly, towards the stage.'],
+nature:['Above the cabin, the clouds part for a moment, and a handful of stars appear, bright and very far away. Then the clouds close again, softly, like a curtain drawn across a window. The rain resumes its slow, steady patter.','The tide is going out now. With each wave, the water slips a little further down the beach, leaving behind smooth, shining sand and small pools where crabs settle in for the night.','In the forest behind the cabin, the trees sway gently. Their branches creak and rustle, and drops of rain fall from leaf to leaf, all the way down to the soft, mossy ground.','You pull the blanket a little higher. The stove ticks as it cools. The sound of the sea fills the room, wave after wave, so regular that it seems to be breathing for you.'],
+scifi:['You float through the long central corridor, pushing gently off the walls. Lights dim to amber as you pass the crew quarters, and you hear the soft breathing of the sleepers, slow and deep, carried through the ship\'s quiet air.','On the bridge, a star map glows in pale blue lines. Your destination is a small yellow dot, many years away. There is no hurry. The ship will get there, steadily, one quiet hour at a time.','The ship\'s gentle voice asks if you would like some music. You say yes, and a soft piano piece begins to play, recorded long ago on Earth, by someone who could never have imagined it being heard out here among the stars.','You pass a cloud of comet dust, and for a few minutes the observation window sparkles as tiny particles glint in the ship\'s lights, like snow falling upward.'],
+romance:['The following week, you return. The bell above the door rings, and there they are, waving from behind a stack of new arrivals. They have saved a book for you, one they think you will love, with a little note tucked inside the cover.','You walk together along the river after closing. The lamps make long golden ribbons on the water, and you talk about nothing in particular, which turns out to be the best kind of conversation.','At a little stall, you share a paper cone of roasted chestnuts, warm in your hands. You laugh about the time you both reached for the same book, and agree that it was clearly fate, or at least very good luck.','Back at the shop, someone has hung fairy lights in the window. The cat that lives there curls up on the windowsill between you, purring, and the evening slows to a gentle, golden pace.'],
+travel:['You find a small square with a fountain in the middle, its water catching the lamplight. A few people sit on benches, talking quietly. A musician plays something slow on a guitar, and nobody is in a hurry to leave.','A little shop is still open, its shelves full of things you do not need but love to look at: postcards, tin toys, jars of honey, hand-painted tiles. The shopkeeper smiles and lets you browse in peace.','You climb a set of old stone steps to a viewpoint. Below you, the city spreads out in a quilt of lights, and beyond it the dark shape of hills or sea. The air is cooler up here, and very still.','You sit at a little table outside a café as the staff begin to tidy up. They bring you something warm anyway, with a smile, and you watch the street grow quieter and quieter.'],
+meditation:['Now bring your attention to your breath again. Breathe in, and feel the cool air at the tip of your nose. Breathe out, and feel the warm air leave. There is nothing you need to do except notice.','Imagine a soft, warm light resting on the top of your head. As you breathe, it slowly flows down over your forehead, your cheeks, your neck, melting any tension it finds, like warm honey.','Picture a calm lake at dusk. With each out-breath, the surface of the lake becomes smoother and stiller, until it is a perfect mirror for the first stars.','If your mind wanders, that is perfectly fine. Simply notice where it went, and gently, kindly, bring it back to the feeling of your body resting in the bed.']};
+const ADRIFT=[
+'Let the scene grow a little softer now, {name}, like a photograph left in the sun. You do not need to remember every detail. Just let the feeling of it stay with you: calm, warm, unhurried.',
+'Somewhere in the distance a clock chimes, slowly, once for every hour. You do not count. The sound simply rolls over you and fades, and the silence after it is even deeper than before.',
+'Notice how comfortable you are. The pillow under your head. The blanket over your shoulders. The quiet room around you. Everything is exactly where it needs to be.',
+'Imagine a small lantern glowing beside you. Its light is warm and golden, and it does not flicker. It will keep watch while you rest, so you do not have to.',
+'There is a softness to the evening now, a sense that the day has finally been put away, like dishes dried and stacked, like shoes set neatly by the door.',
+'If a thought from the day comes back, let it. Picture it written on a leaf, and watch the leaf drift away on a slow river, around the bend and out of sight.',
+'The air is cool and fresh, and each breath you take seems to go a little deeper than the last, filling you up and then slowly, gently, letting go.',
+'Picture the sky above wherever you are tonight. Above the roof, above the clouds, the stars are turning slowly, as they always have. You are a small, safe part of a very large and peaceful night.',
+'Your hands are heavy now. Your feet are heavy. Even your thoughts are heavy, sinking slowly like pebbles to the bottom of a clear, still pool.',
+'Far away, the sea is rolling in and rolling out. You cannot hear it, but you can imagine it, a long, slow rhythm keeping time for the whole sleeping world.',
+'There is nowhere you need to be, {name}, and nothing you need to do. Tomorrow will take care of itself. For now, there is only this moment, and this one, and this one.',
+'Imagine the smell of rain on warm earth, or of fresh sheets, or of bread baking somewhere down the street. Let whatever comforting scent comes to you fill the room.'];
+const NUMW=(()=>{const o=['','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'],t=['','','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];const a=['one hundred'];for(let n=99;n>=1;n--)a.push(n<20?o[n]:t[Math.floor(n/10)]+(n%10?'-'+o[n%10]:''));return a})();const _NUMW_OLD=['one hundred','ninety-nine','ninety-eight','ninety-seven','ninety-six','ninety-five','ninety-four','ninety-three','ninety-two','ninety-one','ninety','eighty-nine','eighty-eight','eighty-seven','eighty-six','eighty-five','eighty-four','eighty-three','eighty-two','eighty-one','eighty','seventy-nine','seventy-eight','seventy-seven','seventy-six','seventy-five','seventy-four','seventy-three','seventy-two','seventy-one','seventy','sixty-nine','sixty-eight','sixty-seven','sixty-six','sixty-five','sixty-four','sixty-three','sixty-two','sixty-one','sixty'];
+const COUNTP=['softer','slower','deeper','heavier','quieter','warmer','stiller','calmer'];
+const CALM=['Your breath is slow and even.','The bed holds you completely.','There is nothing left to do tonight.','Let your jaw soften.','Your shoulders melt a little further.','Each number is a step down a soft, carpeted stair.','The room is quiet and safe.','Thoughts drift by like distant boats.','Your eyelids are warm and heavy.','The darkness is soft, like velvet.','You are drifting, and that is good.','Sleep is very close now.','Let your hands lie open and loose.','Your heartbeat is slow and steady.','The night is long and kind.','Somewhere, gentle rain is falling.'];
+const DREAMS=[
+'As the story fades, it slowly turns into a dream, {name}. You are walking through a walled garden at dusk. Lavender and rosemary brush your legs, releasing their scent. A stone path leads past a sundial and a small pond where goldfish move like slow embers. A wooden bench waits under an apple tree, and you sit, and the garden grows dim and blue around you.',
+'Now you are in a rowing boat on a still lake. The oars rest across your lap. The boat drifts by itself, turning slowly, and the water makes small, polite sounds against the hull. Mist lies on the far shore. The first stars come out, one, then three, then too many to count, and each is reflected perfectly in the water below you.',
+'Now you are on a night train, in a little compartment with a folded bed and a lamp with a green shade. The train rocks gently, side to side, and the wheels go clickety-clack, clickety-clack, in a rhythm that seems made for sleeping. Outside, dark fields and sleeping villages slide past, a lit window here and there, like a slow, kind film.',
+'Now snow is falling outside a wide window, large soft flakes drifting down without any hurry at all. You are wrapped in a heavy blanket by a fire. The world outside is going white and quiet, every sound muffled, every edge softened. A log settles in the grate with a hush and a small shower of sparks.',
+'Now you are lying in a hammock strung between two palm trees. A warm breeze moves it slowly back and forth. Waves fold onto the sand a few steps away, and the leaves above you rustle like pages turning. The sky is deep violet, and the air smells of salt and frangipani.',
+'Now you are in an old library late at night. Green lamps glow on long wooden tables. The shelves rise into shadow, full of books that smell of dust and vanilla. A clock ticks somewhere. You choose a large, soft armchair and sink into it, and the quiet of a thousand closed books settles around you like a blanket.'];
+const ORD=['first','second','third','fourth','fifth','sixth','seventh','eighth','ninth','tenth','eleventh','twelfth','thirteenth','fourteenth','fifteenth','sixteenth','seventeenth','eighteenth','nineteenth','twentieth','twenty-first','twenty-second','twenty-third','twenty-fourth','twenty-fifth','twenty-sixth','twenty-seventh','twenty-eighth','twenty-ninth','thirtieth'];
+const IMG=['a feather settling on still water','a candle flame growing small and steady','a leaf drifting down through autumn air','a wave sliding back over smooth sand','snow settling on a quiet field','a cloud dissolving into blue','a lantern dimming in a far window','a boat resting at its mooring','a cat curling up by a fire','warm sand cooling at dusk'];
+function breathPass(i){if(i>=ORD.length)return null;const c=k=>CALM[(i*5+k+7)%CALM.length];return `The ${ORD[i]} slow breath. In, two, three, four. Hold it gently. And out, two, three, four, five, six. Imagine ${IMG[i%IMG.length]}. ${c(0)} ${c(1)}`}
+const STARS=['silver','golden','blue','pink','tiny','sleepy','twinkly','faraway','shy','bright'];
+function starCount(i){if(i>=10)return null;return [0,1,2].map(k=>{const n=i*3+k;return `${NUMK[n]||n+1} ${STARS[n%STARS.length]} star${n?'s':''}${k==2?', twinkling slowly':''}.`}).join(' ')+` ${['Breathe in.','Breathe out.','Snuggle down.','So cosy.','Eyes heavy.'][i%5]}`}
+function countdown(i,thing){const a=NUMW.slice(i*5,i*5+5);if(a.length<5)return null;const w=COUNTP[i%COUNTP.length];const c=k=>CALM[(i*3+k)%CALM.length];return `${cap(a[0])}${thing?`, ${thing}`:''}. ${c(0)} ${cap(a[1])}, a little ${w}. ${c(1)} ${cap(a[2])}. Let the number float away. ${cap(a[3])}, each breath ${COUNTP[(i+3)%COUNTP.length]} than the last. ${c(2)} ${cap(a[4])}. If you lose count, that is perfect. Just rest.`}
 function genAdult({child:l,length,genre,mood},r){
- if(!AG[genre])genre='nature';const G=AG[genre],name=l.name||'friend',target=ALEN[length]||10,P=[];
+ if(!AG[genre])genre='nature';const G=AG[genre],name=l.name||'friend',mins=[5,10,20,30].includes(+length)?+length:5,target=AWORDS[mins],P=[];
  const ints=(l.interests||'').split(',').map(s=>s.trim()).filter(Boolean);
  const place=G.places?pick(G.places,r):'';const v={name,place};let title;
- const addBreath=()=>P.push(pick(BREATH,r));
- const intro=`Welcome, ${name}. Get comfortable, dim the lights, and let this ${mood==='cosy'?'cosy':mood==='wistful'?'gentle':'calm'} story keep you company as you drift toward sleep.`;
- P.push(intro);
- if(G.stories||G.eras){const S=pick(G.stories||G.eras,r);title=S.t;S.p.forEach((x,i)=>{P.push(x);if(i%2===1&&P.length<target-2)addBreath()});
+ const wc=()=>P.join(' ').split(/\s+/).length;
+ const br=shuffle(BREATH,r),addBreath=()=>{if(br.length)P.push(br.pop())};
+ const ex=shuffle(AEXTRA[genre]||[],r),dr=shuffle(ADRIFT,r);
+ P.push(`Welcome, ${name}. Get comfortable, dim the lights, and let this ${mood==='cosy'?'cosy':mood==='wistful'?'gentle':'calm'} story keep you company as you drift toward sleep. You don't need to follow every word. Let the voice be a soft background, like rain on a window, and let your body begin to settle.`);
+ let closing;
+ if(G.stories||G.eras){const L=shuffle(G.stories||G.eras,r);const S=L[0];title=S.t;
+  S.p.forEach((x,i)=>{P.push(x);if(i===1)addBreath()});
   if(genre==='history')P.push(`Historians piece these scenes together from records and remains, and many details of ordinary lives are imagined. But the rhythm of evening, of lamps lit and work set down, is one every era shared.`);
-  while(P.length<target-1)addBreath();P.push(S.r||`Let the story fade softly now, ${name}. The past is quiet, the present is safe, and sleep is close.`)}
- else if(genre==='travel'){const C=pick(G.cities,r);title=`A Night Walk in ${C.c}`;P.push(`Tonight you are in ${C.c}. The day's visitors have gone home, and ${C.d[0]}.`);P.push(`You walk slowly. ${cap(C.d[1])}, and ${C.d[2]}.`);let b=shuffle(G.beats,r);while(P.length<target-1){P.push(fill(b.length?b.pop():pick(BREATH,r),v));if(P.length<target-1&&r()<.4)addBreath()}P.push(`At last you return to your room, and through the window ${C.c} glows softly, settling into sleep, just as you are.`)}
- else{title=pick(G.titles,r);P.push(fill(pick(G.open,r),v));let b=G.beats.slice();if(target<12)b=b.slice(0,Math.max(3,target-4));
-  b.forEach((x,i)=>{if(P.length<target-1){P.push(fill(x,v));if(i%2===1&&P.length<target-2&&genre!=='mystery')addBreath()}});
-  while(P.length<target-1)addBreath();P.push(fill(pick(G.end,r),v))}
+  if(S.r)P.push(S.r);
+  for(let k=1;k<L.length&&wc()<target-260;k++){const N=L[k];P.push(`Let that story rest, ${name}, and if you are still awake, here is another, just as quiet. It is called ${N.t}.`);N.p.forEach(x=>P.push(x));if(N.r)P.push(N.r);if(dr.length)P.push(fill(dr.pop(),v))}
+  closing=`Let the stories fade softly now, ${name}. The past is quiet, the present is safe, and sleep is close.`}
+ else if(genre==='travel'){const C=pick(G.cities,r);title=`A Night Walk in ${C.c}`;P.push(`Tonight you are in ${C.c}. The day's visitors have gone home, and ${C.d[0]}.`);P.push(`You walk slowly. ${cap(C.d[1])}, and ${C.d[2]}.`);shuffle(G.beats,r).forEach((b,i)=>{P.push(fill(b,v));if(ex.length)P.push(ex.pop());if(i%2)addBreath()});closing=`At last you return to your room, and through the window ${C.c} glows softly, settling into sleep, just as you are.`}
+ else{title=pick(G.titles,r);P.push(fill(pick(G.open,r),v));const b=G.beats;
+  b.forEach((x,i)=>{P.push(fill(x,v));if(i===Math.floor(b.length/2)){while(ex.length&&ex.length>1)P.push(ex.pop())}if(i%2===1&&genre!=='mystery')addBreath()});
+  closing=fill(pick(G.end,r),v)}
  if(ints.length&&genre!=='bible'&&genre!=='history')P.splice(2,0,`Perhaps, as you listen, your mind wanders to ${pick(ints,r)}. Let it. Every thought is welcome here, and each one can float softly away.`);
+ const closeW=closing.split(/\s+/).length+20;
+ while(wc()+closeW<target&&(ex.length||dr.length||br.length)){if(ex.length)P.push(ex.pop());else if(dr.length)P.push(fill(dr.pop(),v));else addBreath()}
+ P.push(closing);
+ if(wc()<target-300&&genre!=='meditation'){const bs=AG.meditation.beats;P.push(`Before the dream begins, ${name}, let's soften the body once more, from the feet upward.`);bs.forEach(x=>{if(wc()<target-200)P.push(x)})}
+ const dm=shuffle(DREAMS,r);while(wc()<target-450&&dm.length)P.push(fill(dm.pop(),v));
+ if(wc()<target){P.push(`Now, ${name}, let's count down slowly together, from one hundred. Don't try to keep up. The numbers are only stepping stones into sleep.`);for(let i=0;wc()<target;i++){const c=countdown(i,i===0?'and breathe out':'');if(!c)break;P.push(c)}}
+ if(wc()<target){P.push(`Now just follow the breath, ${name}. Slow and easy.`);for(let i=0;wc()<target;i++){const b=breathPass(i);if(!b)break;P.push(b)}}
  P.push(`Goodnight, ${name}. 🌙`);
- return {title,scene:G.scene,pages:P.map(t=>({text:t,scene:G.scene})),animal:null,genre,mode:'adult',mood};
+ return {title,scene:G.scene,pages:P.map(t=>({text:t,scene:G.scene})),animal:null,genre,mode:'adult',mood,minutes:mins};
 }
+
 const BANNED_FOR_KIDS=['ghost'];
 function generate(o){const r=rng(o.seed||Date.now()+Math.random()+(o.child&&o.child.name));
  if(o.mode==='adult')return genAdult(o,r);
