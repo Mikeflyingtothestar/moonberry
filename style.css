@@ -56,3 +56,13 @@ h1 em,h1 i,.accent{color:var(--gold)}
 .bar{height:10px;border-radius:99px;background:#ffffff14;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#B09BE6,#F5C85A);transition:width .3s}
 .caret{display:inline-block;width:9px;height:18px;background:#F5C85A;vertical-align:middle;animation:blink 1s steps(2) infinite}@keyframes blink{50%{opacity:0}}
 @media (prefers-reduced-motion:reduce){.caret{animation:none}}
+button.card{font:inherit;color:inherit;width:100%;text-align:left;cursor:pointer}
+button:disabled,.btn:disabled{opacity:.55;cursor:progress;transform:none!important;box-shadow:none}
+.danger{background:transparent;color:#ffb4c8;border:1px solid #e7a0b0}
+.banner{background:rgba(176,155,230,.12);border:1px solid rgba(176,155,230,.45);border-radius:14px;padding:12px 14px;margin:12px 0}
+.ok{background:rgba(245,200,90,.12);border:1px solid rgba(245,200,90,.45);border-radius:10px;padding:10px}
+.avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;background:#1E2160;display:block}
+.prow{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid rgba(255,255,255,.08)}
+.prow p{margin:0}
+.check{display:flex;gap:8px;align-items:flex-start;margin:10px 0;font-size:14px;opacity:1}
+.check input{width:auto;margin:3px 0 0;flex:none}
