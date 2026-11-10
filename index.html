@@ -1,1 +1,113 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MoonBerry · Bedtime stories where your child is the hero</title><meta name="description" content="Personalised, illustrated bedtime stories starring your child, read aloud. Gentle lessons, calm bedtimes, made for children and their parents."><meta property="og:title" content="MoonBerry · Bedtime stories where your child is the hero"><meta property="og:description" content="Bedtime stories where your child is the hero: personalised, illustrated and read aloud."><link rel="icon" type="image/svg+xml" href="assets/favicon.svg"><link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png"><meta property="og:image" content="https://mikeflyingtothestar.github.io/moonberry/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:url" content="https://mikeflyingtothestar.github.io/moonberry/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="MoonBerry"><meta name="twitter:image" content="https://mikeflyingtothestar.github.io/moonberry/assets/og-image.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet"><meta name="theme-color" content="#1E2160"><meta property="og:type" content="website"><link rel="stylesheet" href="style.css"></head><body><nav id="nav"></nav><main id="app"><p class="muted" style="padding:28px 0">Loading MoonBerry…</p></main><footer><div class="cols"><a href="#/about">About</a><a href="#/faq">FAQ</a><a href="#/privacy">Privacy</a><a href="#/terms">Terms</a><a href="#/contact">Contact</a></div><img src="assets/logo-dark-bg.svg" alt="MoonBerry" height="34" style="display:block;margin:6px auto 8px"> Early access · Pricing shown is planned; no payments are taken</footer><script src="story.js"></script><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MoonBerry · Bedtime stories where your child is the hero</title>
+<meta name="description" content="Personalised, illustrated bedtime stories starring your child, read aloud. Gentle lessons, calm bedtimes, made for children and their parents.">
+<meta name="theme-color" content="#1E2160">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MoonBerry · Bedtime stories where your child is the hero">
+<meta property="og:description" content="Bedtime stories where your child is the hero: personalised, illustrated and read aloud.">
+<meta property="og:image" content="https://mikeflyingtothestar.github.io/moonberry/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://mikeflyingtothestar.github.io/moonberry/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MoonBerry">
+<meta name="twitter:image" content="https://mikeflyingtothestar.github.io/moonberry/assets/og-image.png">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#app">Skip to content</a>
+<div id="live" class="sr-only" aria-live="polite"></div>
+<nav id="nav" aria-label="Primary"><a class="brand" href="#/"><img src="assets/logo-mark.svg" alt="" width="28" height="32"><span class="wm"><span class="m1">Moon</span><span class="m2">Berry</span></span></a><div class="nav-links"><button type="button" class="linkish" data-act="jump" data-target="how">How it works</button><button type="button" class="linkish" data-act="jump" data-target="pricing">Pricing</button><a href="#/faq">FAQ</a></div><div class="nav-tools"><a href="#/login">Log in</a><a class="btn" href="#/signup">Start free</a></div></nav>
+<main id="app" tabindex="-1">
+<div id="home-root">
+<section class="hero">
+<div class="sky" aria-hidden="true"><div class="layer" data-depth="6"><i class="star" style="left:8%;top:18%"></i><i class="star" style="left:22%;top:40%"></i><i class="star" style="left:40%;top:16%"></i><i class="star" style="left:63%;top:28%"></i><i class="star" style="left:78%;top:12%"></i><i class="star" style="left:88%;top:46%"></i><i class="star" style="left:14%;top:70%"></i><i class="star" style="left:52%;top:62%"></i></div><div class="layer" data-depth="12"><div class="moon"></div></div><div class="layer" data-depth="18"><div class="cloud" style="top:22%;width:180px;animation-duration:80s"></div><div class="cloud" style="top:62%;width:220px;animation-duration:110s;animation-delay:-40s"></div></div><div class="shoot" id="shoot"></div></div>
+<div class="hero-grid">
+<div class="hero-copy">
+<p class="eyebrow">Bedtime, personally</p>
+<h1>Stories where your child is <em>the hero</em></h1>
+<p class="lede">MoonBerry writes a gentle, illustrated bedtime story starring your child, then reads it aloud. Five quiet minutes. No card. No scary surprises.</p>
+<div class="cta-row"><a class="btn" href="#/signup">Create a free story</a><a class="btn ghost" href="#/try">Try a 5-minute story</a></div>
+<ul class="hero-points"><li>Free stories are 5 minutes</li><li>Read aloud on any phone</li><li>Parent consent before a profile</li></ul>
+</div>
+<div class="hero-stage"><div class="glass-story"><img class="mascot" src="assets/logo-mark.svg" alt="" width="86" height="97"><p class="eyebrow">Tonight’s story</p><h2>Mia and the Twinkling Galaxy</h2><p class="muted">A soft adventure about kindness, read in a calm voice while the moon keeps watch.</p></div></div>
+</div>
+</section>
+<section class="proof" aria-label="What families can count on"><article><strong>Parent first</strong><span class="muted">A child profile starts only after a guardian agrees.</span></article><article><strong>Gentle endings</strong><span class="muted">Kids mode never offers ghost or scary tales.</span></article><article><strong>EU accounts</strong><span class="muted">Profiles and stories are stored in Frankfurt.</span></article><article><strong>$0 to begin</strong><span class="muted">Unlimited 5-minute stories during early access.</span></article></section>
+<section class="section" id="how"><h2>How bedtime works</h2><div class="grid"><article class="card"><p class="step-no">01</p><h3>Add your child</h3><p class="muted">A nickname, age, pronoun, interests and a favourite animal. A photo is optional.</p></article><article class="card"><p class="step-no">02</p><h3>Choose tonight</h3><p class="muted">Match a topic to their interests, or pick one, plus a lesson such as kindness or bravery.</p></article><article class="card"><p class="step-no">03</p><h3>Read or listen</h3><p class="muted">Illustrated pages, a steady voice, and a player that stays within reach.</p></article></div></section>
+<section class="section" id="topics"><div class="lib-head"><div><p class="eyebrow">For kids</p><h2>Eighteen gentle worlds</h2></div></div><p class="muted">Picked from your child’s interests, or chosen by you. Every one ends calmly.</p><div class="shelf" tabindex="0" aria-label="Story topics"></div></section>
+<section class="section" id="sample"><h2>A peek inside</h2><div class="card"><div class="grid"><div id="sampleart" style="min-height:180px"></div><div><h3 id="sampletitle">A bedtime story</h3><p class="page" id="typer" style="min-height:6em"></p></div></div></div></section>
+<section class="section"><h2>Everything a bedtime needs</h2><div class="grid"><article class="card"><h3>Read aloud</h3><p class="muted">Pick a voice and a speed. The sentence being read is highlighted.</p></article><article class="card"><h3>Bedtime mode</h3><p class="muted">A darker, quieter reader for sleepy eyes.</p></article><article class="card"><h3>Sleep timer</h3><p class="muted">Narration stops after 5, 10, 20 or 30 minutes.</p></article><article class="card"><h3>A library</h3><p class="muted">Favourites, listen counts and a place to return tomorrow.</p></article><article class="card"><h3>Every child</h3><p class="muted">Each profile keeps its own language, voice and stories.</p></article><article class="card"><h3>Safe for kids</h3><p class="muted">Grown-up sleep stories, including ghost tales, stay in For me.</p></article></div></section>
+<section class="section"><h2>Why the last minutes matter</h2><div class="grid"><article class="card"><h3>Connection</h3><p class="muted">A shared story is a few quiet minutes together at the end of the day.</p></article><article class="card"><h3>Routine</h3><p class="muted">Paediatric guidance, including from the <a href="https://www.aap.org/" target="_blank" rel="noopener">American Academy of Pediatrics</a>, encourages a consistent bedtime. Reading together belongs in one.</p></article><article class="card"><h3>Winding down</h3><p class="muted">A calm story replaces the last scroll and gives a busy mind something gentle to follow.</p></article></div></section>
+<section class="section" id="pricing"><h2>Simple pricing</h2><p class="muted">Planned prices. No payment is taken today. Premium and Family are waitlists.</p><div class="grid"><article class="card price"><h3>Free</h3><p><b>$0</b></p><p class="muted">5-minute stories starring your child, read aloud, saved to a small library.</p><ul><li>2 child profiles</li><li>Kids topics and lessons</li><li>Browser voices</li></ul><a class="btn" href="#/signup">Start free</a></article><article class="card price hl"><span class="tag gold">Most loved</span><h3>Premium</h3><p><b>US$5.99</b> <span class="muted">/ month</span></p><p class="muted">Longer bedtime adventures, when payments open.</p><ul><li>Stories past 5 minutes</li><li>Every topic and adult genre</li><li>Sleep timer and bedtime mode</li></ul><button type="button" class="btn" data-act="upgrade" data-feature="premium">Join the waitlist</button></article><article class="card price"><h3>Family</h3><p><b>US$9.99</b> <span class="muted">/ month</span></p><p class="muted">Premium, plus room for every child.</p><ul><li>Everything in Premium</li><li>More child profiles</li><li>Stories to share with grandparents</li></ul><button type="button" class="btn ghost" data-act="upgrade" data-feature="family">Join the waitlist</button></article></div></section>
+<section class="section" id="questions"><h2>Questions</h2><details><summary>Is it safe for children?</summary><p class="muted">Kids mode only offers gentle topics. Ghost and horror genres cannot be chosen there, and the library refuses to store a scary story on a child profile.</p></details><details><summary>Does it cost anything?</summary><p class="muted">Early access is free, including 5-minute stories. Premium (US$5.99) and Family (US$9.99) are planned; no payments are taken today.</p></details><details><summary>Is there anything for parents?</summary><p class="muted">After you sign in, switch to For me for grown-up sleep stories. Those stories are not shown in kids mode.</p></details></section>
+<section class="section center"><h2>Tonight’s story is waiting</h2><p class="lede" style="margin-inline:auto">Create one in under a minute, or listen to a free story with no account.</p><div class="cta-row" style="justify-content:center"><a class="btn" href="#/signup">Start free</a><a class="btn ghost" href="#/try">Try a 5-minute story</a></div></section>
+</div>
+</main>
+<footer class="site-foot">
+<div class="foot-grid">
+<div>
+<a class="brand" href="#/"><img src="assets/logo-mark.svg" alt="" width="28" height="32"><span class="wm"><span class="m1">Moon</span><span class="m2">Berry</span></span></a>
+<p class="muted">Personalised bedtime stories, read aloud. Early access. Pricing shown is planned, and no payments are taken.</p>
+</div>
+<div>
+<p class="foot-label">Explore</p>
+<a href="#/">Home</a>
+<a href="#/try">Free story</a>
+<a href="#/faq">FAQ</a>
+<a href="#/about">About</a>
+</div>
+<div>
+<p class="foot-label">Care</p>
+<a href="#/privacy">Privacy</a>
+<a href="#/terms">Terms</a>
+<a href="#/contact">Contact</a>
+</div>
+</div>
+</footer>
+<aside id="player" class="np" hidden aria-label="Now playing">
+<div class="np-main">
+<div class="np-art" id="np-art" aria-hidden="true"></div>
+<div class="np-meta">
+<p class="np-kicker" id="np-kicker"></p>
+<p class="np-title" id="np-title"></p>
+<p class="np-sub" id="np-sub"></p>
+</div>
+<div class="np-transport" role="group" aria-label="Playback">
+<button type="button" class="np-skip" data-act="prev" aria-label="Previous page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 6 8 12l8 6V6z"/><path d="M7 6h2v12H7z"/></svg></button>
+<button type="button" class="np-play" id="play" data-act="play" aria-label="Read aloud" aria-pressed="false"><svg class="ico ico-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5-11-6.5z"/></svg><svg class="ico ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.2v14H7zM13.8 5H17v14h-3.2z"/></svg><span class="np-label">Play</span></button>
+<button type="button" class="np-skip" data-act="next" aria-label="Next page"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6 8 6-8 6V6z"/><path d="M15 6h2v12h-2z"/></svg></button>
+</div>
+<div class="np-progress">
+<div class="np-bar" aria-hidden="true"><i id="np-fill"></i></div>
+<p id="np-page" class="np-page">Page 1</p>
+</div>
+</div>
+<div class="np-tools">
+<label>Voice
+<span class="np-voicerow">
+<select id="voice" aria-label="Narration voice"></select>
+<button type="button" class="btn ghost vprev" data-act="vprev" aria-label="Preview voice">Preview</button>
+</span>
+</label>
+<label>Speed
+<select id="rate" aria-label="Reading speed"><option value=".7">Slow</option><option value=".85" selected>Gentle</option><option value="1">Normal</option></select>
+</label>
+<label>Sleep timer
+<select id="timer" aria-label="Sleep timer"><option value="0">Off</option><option value="5">5 min</option><option value="10">10 min</option><option value="20">20 min</option><option value="30">30 min</option></select>
+</label>
+<button type="button" class="btn ghost" id="np-bed" data-act="bed" aria-pressed="false">Bedtime</button>
+</div>
+</aside>
+<script src="story.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
