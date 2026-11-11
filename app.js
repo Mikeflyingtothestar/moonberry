@@ -72,6 +72,32 @@ function friendly(error) {
   if (isUpgrade(error)) return 'That is past the limit of your current plan.';
   if (isListenerLimit(error)) return 'You can save up to 10 listener profiles. Remove one to add another.';
   const msg = String(error.message || '');
+  const code = String(error.code || error.error_code || '');
+  const AUTH_CODES = {
+    over_email_send_rate_limit: 'MoonBerry has sent too many sign-up emails in the last hour, so we could not send yours just now. Please try again in about an hour. (Email limit reached)',
+    over_request_rate_limit: 'Too many attempts from this device. Please wait a few minutes and try again.',
+    over_sms_send_rate_limit: 'Too many codes were sent. Please wait a while and try again.',
+    email_address_invalid: 'That email address cannot be used. Please check it, or try another address.',
+    email_address_not_authorized: 'Sign-up emails cannot be sent to that address yet. Please try again later or use another email.',
+    email_exists: 'That email is already registered. Try logging in.',
+    user_already_exists: 'That email is already registered. Try logging in.',
+    email_not_confirmed: 'Confirm your email first (check your inbox), then log in.',
+    invalid_credentials: 'That email and password do not match. If you forgot your password, use "Forgot password".',
+    signup_disabled: 'New sign-ups are paused right now. Please try again later.',
+    email_provider_disabled: 'Email sign-up is turned off right now. Please try again later.',
+    weak_password: msg || 'That password is too weak. Use at least 10 characters with letters and numbers.',
+    same_password: 'Your new password must be different from the old one.',
+    captcha_failed: 'The security check failed. Please reload the page and try again.',
+    otp_expired: 'That email link has expired or was already used. Log in, or ask for a new link.',
+    flow_state_not_found: 'Your email is confirmed. Please log in to continue.',
+    flow_state_expired: 'That link has expired. Please log in, or ask for a new link.',
+    bad_code_verifier: 'Your email is confirmed. Please log in to continue.',
+    session_not_found: 'Your session ended. Please log in again.',
+    unexpected_failure: 'Our account service had a problem. Please try again in a minute.'
+  };
+  if (AUTH_CODES[code]) return AUTH_CODES[code];
+  if (+error.status === 429 || /email rate limit/i.test(msg)) return AUTH_CODES[/email/i.test(msg) ? 'over_email_send_rate_limit' : 'over_request_rate_limit'];
+  if (/Database error saving new user/i.test(msg)) return 'We could not create your account because of a server problem. Please try again shortly.';
   if (/Parental consent/i.test(msg)) return 'Please confirm you are the parent or guardian before adding a child.';
   if (/stories_kid_content_safe|kid content|is_scary/i.test(msg)) return 'That story cannot be saved for a child. MoonBerry keeps ghost and scary tales out of kids mode.';
   if (/Invalid login credentials/i.test(msg)) return 'That email and password do not match.';
@@ -2125,17 +2151,25 @@ async function boot() {
   if (state.session) await refreshAccount();
   else state.ent = freeEnt();
   state.ready = true;
+  let routedByHash = false;
   if (/[?&]code=|access_token|type=recovery|type=signup|error_description/.test(arrived)) {
     const q = new URLSearchParams(arrivedSearch);
     const h = new URLSearchParams(arrivedHash.startsWith('#/') ? '' : arrivedHash.replace(/^#/, ''));
     const desc = q.get('error_description') || h.get('error_description') || '';
-    if (desc) state.notice = decodeURIComponent(desc.replace(/\+/g, ' '));
+    const errCode = q.get('error_code') || h.get('error_code') || '';
+    const hadCode = q.has('code');
+    const isSignup = /type=signup/.test(arrived) || hadCode;
+    if (errCode || desc) state.notice = friendly({ code: errCode, message: decodeURIComponent(String(desc).replace(/\+/g, ' ')) });
+    else if (state.session && isSignup && !state.recovery) state.notice = "You're confirmed! Welcome to MoonBerry.";
+    else if (!state.session && hadCode && !/type=recovery/.test(arrived)) state.notice = 'Your email is confirmed. Please log in to continue.';
     history.replaceState(null, '', location.pathname);
+    const beforeHash = location.hash;
     if (state.recovery || /type=recovery/.test(arrived)) { state.recovery = true; location.hash = '#/reset'; }
     else if (state.session) location.hash = '#/app';
     else location.hash = '#/login';
+    routedByHash = location.hash !== beforeHash;
   }
   booted = true;
-  await route();
+  if (!routedByHash) await route();
 }
 boot();
